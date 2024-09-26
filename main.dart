@@ -28,6 +28,7 @@ void main() {
     numTried.add(guess);
     if (start == null) {
       start = DateTime.now();
+      print("Début du chrono " + start.toString());
     }
 
     if (guess < targetNumber) {
@@ -37,6 +38,7 @@ void main() {
     } else {
       print(
           "Congrats! You've found the number $targetNumber in $attempts attempts in ${DateTime.now().difference(start).inSeconds} seconds.");
+      print(DateTime.now().toString());
     }
     
   } while (guess != targetNumber);
