@@ -6,6 +6,8 @@ void main() {
   int targetNumber = random.nextInt(100) + 1;
   int? guess;
   int attempts = 0;
+  Set<int> numTried = {};
+  DateTime? start;
 
   print('Bienvenue dans le jeu "Guess the Number" !');
   print('Je pense à un nombre entre 1 et 100. Pouvez-vous le deviner ?');
@@ -18,7 +20,15 @@ void main() {
       print('ERR: Veuillez entrer un nombre valide.');
       continue;
     }
+    if (numTried.contains(guess)) {
+      print('Vous avez déjà essayé ce nombre... Essayez un autre !');
+      continue;
+    }
     attempts++;
+    numTried.add(guess);
+    if (start == null) {
+      start = DateTime.now();
+    }
 
     if (guess < targetNumber) {
       print('C\'est plus grand !');
@@ -26,7 +36,8 @@ void main() {
       print('C\'est plus petit !');
     } else {
       print(
-          "Congrats! You've found the number $targetNumber in $attempts attempts.");
+          "Congrats! You've found the number $targetNumber in $attempts attempts in ${DateTime.now().difference(start).inSeconds} seconds.");
     }
+    
   } while (guess != targetNumber);
 }
